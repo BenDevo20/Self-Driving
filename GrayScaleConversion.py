@@ -16,5 +16,11 @@ new_shape = image_gray.shape
 # notice the difference in size between the grayscale image and the color image
 print(new_shape)
 
+# if we want to sort out the white color out of the image 
+image_copy = np.copy(image_gray)
+# this for any value that is not white 
+image_copy[(image_copy[:,:] < 250)] = 0 
+plt.imshow(image_copy, cmap='gray')
+
 # saving the grayscale image
 cv2.imwrite('image_lane_c.jpg', image_gray)
