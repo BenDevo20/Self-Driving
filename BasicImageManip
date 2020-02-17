@@ -1,0 +1,25 @@
+import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+import numpy as np
+import cv2
+
+# import image that is in directory
+image = cv2.imread('Self_Driving_Car.jpg')
+shape = image.shape
+
+# convert image to gray scale
+gray_conv = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# sharpening kernel - add contrast to edges and accentuates the edges of the image nxn matrix
+sharp_kern = np.array([[-1,-1,-1],
+                       [-1,9,1],
+                       [-1,-1,-1]])
+sharp_image = cv2.filter2D(gray_conv, -1, sharp_kern)
+
+# blurr kernel - doing a convolution between a kernel and an image
+blurr_kern = np.ones((8,8))
+blurr_image = cv2.filter2D(gray_conv,  -1, blurr_kern)
+
+# normalizing the kernel
+blurr_kern = np.ones((8,8)) * 1/64
+blurr_Image = cv2.filter2D(gray_conv,  -1, blurr_kern)
